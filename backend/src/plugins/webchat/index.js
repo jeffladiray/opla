@@ -47,11 +47,13 @@ class WebChat extends abstractPlugin {
   }
 
   async onMiddlewareRegister(middleware) {
+    logger.debug("[+] O plugins webchat onMiddlewareRegister");
     logger.info("WIP register WebChat ", middleware.name, middleware.token);
     const config = this.zoapp.configuration;
     this.middleware = middleware;
     if (middleware.origin) {
       if (!middleware.application || !middleware.application.id) {
+        logger.debug("  [-] new webchat");
         const name = `${middleware.name}_${middleware.origin}`;
         // get a previously created app with same name
         let app = await this.zoapp.authServer.getApplicationByName(name);
